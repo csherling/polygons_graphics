@@ -37,9 +37,15 @@ int main(int argc, char **argv) {
   /*   parse_file( "stdin", transform, edges, s ); */
 
 
-  add_polygon(polygons,100.0,100.0,0.0,
-	      200.0,100.0,0.0,
-	      200.0,200.0,0.0);
+
+  /* add_polygon(polygons,100.0,100.0,0.0, */
+  /* 	      200.0,100.0,0.0, */
+  /* 	      200.0,200.0,0.0); */
+
+  add_box(polygons,100,100,100,100,100,100);
+
+  matrix_mult(make_rotX(45), polygons);
+  
   draw_polygons(polygons, s, color);
 
   print_matrix(polygons);
