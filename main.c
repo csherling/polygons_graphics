@@ -42,14 +42,25 @@ int main(int argc, char **argv) {
   /* 	      200.0,100.0,0.0, */
   /* 	      200.0,200.0,0.0); */
 
-  add_box(polygons,0,100,0,100,100,100);
+  /* add_box(polygons,0,100,0,100,100,100); */
 
-  matrix_mult(make_rotX(30), polygons);
+  /* matrix_mult(make_rotX(30), polygons); */
   /* matrix_mult(make_rotY(30), polygons); */
-  matrix_mult(make_translate(100,100,0), polygons);
+  /* matrix_mult(make_translate(100,100,0), polygons); */
+
+  /* ident(edges); */
+  
+  add_sphere(polygons, 250, 250, 250, 100, 0.1);
+  /* print_matrix(edges); */
+  /* print_matrix(polygons); */
+
+  /* matrix_mult(make_rotX(30), polygons); */
+  /* matrix_mult(make_rotY(30), polygons); */
+
+  /* draw_lines(edges,s,color); */
   draw_polygons(polygons, s, color);
 
-  print_matrix(polygons);
+  /* print_matrix(polygons); */
   
   display(s);
   
