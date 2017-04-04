@@ -42,10 +42,11 @@ int main(int argc, char **argv) {
   /* 	      200.0,100.0,0.0, */
   /* 	      200.0,200.0,0.0); */
 
-  add_box(polygons,100,100,100,100,100,100);
+  add_box(polygons,0,100,0,100,100,100);
 
-  matrix_mult(make_rotX(45), polygons);
-  
+  matrix_mult(make_rotX(30), polygons);
+  /* matrix_mult(make_rotY(30), polygons); */
+  matrix_mult(make_translate(100,100,0), polygons);
   draw_polygons(polygons, s, color);
 
   print_matrix(polygons);
