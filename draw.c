@@ -157,45 +157,104 @@ void add_sphere( struct matrix * polygon,
 		 double cx, double cy, double cz,
 		 double r, double step ) {
 
-  struct matrix *points = generate_sphere(cx, cy, cz, r, step);
-  int num_steps = (int)(1/step +0.1);
+  struct matrix *points = new_matrix(4,4);
+  points = generate_sphere(cx, cy, cz, r, step);
+  int num_steps = (int)(1/step+0.01);
   int index, lat, longt;
   int latStop, longStop, latStart, longStart;
   latStart = 0;
-  latStop = num_steps;
+  latStop = num_steps - 1;
   longStart = 0;
   longStop = num_steps;
 
+  printf("\n\n%d\n\n", num_steps);
+  
   num_steps++;
-  for(longt = longStart; longt < longStop; longt++){
-    for ( lat = latStart; lat <= latStop; lat++ ) {
-      add_polygon(polygon,
-		  points->m[0][longt*(lat+1)], points->m[1][longt*(lat+1)], points->m[2][longt*(lat+1)],
-		  points->m[0][longt*(lat)], points->m[1][longt*(lat)], points->m[2][longt*(lat)],
-		  points->m[0][longt*(lat+num_steps)], points->m[1][longt*(lat+num_steps)], points->m[2][longt*(lat+num_steps)]
-		  );
+  /* for(longt = longStart; longt < longStop; longt++){ */
+  /*   for ( lat = latStart; lat <= latStop; lat++ ) { */
+  /*     add_polygon(polygon, */
+  /* 		  points->m[0][longt*(lat+1)], points->m[1][longt*(lat+1)], points->m[2][longt*(lat+1)], */
+  /* 		  points->m[0][longt*(lat)], points->m[1][longt*(lat)], points->m[2][longt*(lat)], */
+  /* 		  points->m[0][longt*(lat+num_steps)], points->m[1][longt*(lat+num_steps)], points->m[2][longt*(lat+num_steps)] */
+  /* 		  ); */
 
-      add_polygon(polygon,
-		  points->m[0][longt*(lat+1)], points->m[1][longt*(lat+1)], points->m[2][longt*(lat+1)],
-		  points->m[0][longt*(lat+num_steps)], points->m[1][longt*(lat+num_steps)], points->m[2][longt*(lat+num_steps)],
-		  points->m[0][longt*(lat+num_steps+1)], points->m[1][longt*(lat+num_steps+1)], points->m[2][longt*(lat+num_steps+1)]
-		  );
+  /*     add_polygon(polygon, */
+  /* 		  points->m[0][longt*(lat+1)], points->m[1][longt*(lat+1)], points->m[2][longt*(lat+1)], */
+  /* 		  points->m[0][longt*(lat+num_steps)], points->m[1][longt*(lat+num_steps)], points->m[2][longt*(lat+num_steps)], */
+  /* 		  points->m[0][longt*(lat+num_steps+1)], points->m[1][longt*(lat+num_steps+1)], points->m[2][longt*(lat+num_steps+1)] */
+  /* 		  ); */
 		  
+  /*   } */
+  /* } */
+
+  /* print_matrix(points); */
+  
+  for ( lat = latStart; lat <= latStop; lat++ ) {
+    for ( longt = longStart; longt < longStop; longt++ ) {
+      index = longt * (num_steps) + lat;
+
+      if(longt < longStop -1){
+      printf("index: %d\n", index);
+      add_polygon(polygon,
+		  points->m[0][index+1+num_steps],
+		  points->m[1][index+1+num_steps],
+		  points->m[2][index+1+num_steps],
+		  points->m[0][index+1],
+		  points->m[1][index+1],
+		  points->m[2][index+1],		
+		  points->m[0][index],
+		  points->m[1][index],
+		  points->m[2][index] );
+      
+      add_polygon(polygon,
+		  points->m[0][index+1+num_steps],
+		  points->m[1][index+1+num_steps],
+		  points->m[2][index+1+num_steps],
+		  points->m[0][index],
+		  points->m[1][index],
+		  points->m[2][index],
+		  points->m[0][index+num_steps],
+		  points->m[1][index+num_steps],
+		  points->m[2][index+num_steps] 		
+		  );
+      }
+      else{
+	add_polygon(polygon,
+		    points->m[0][lat+1],
+		    points->m[1][lat+1],
+		    points->m[2][lat+1],
+		    points->m[0][index+1],
+		    points->m[1][index+1],
+		    points->m[2][index+1],		
+		    points->m[0][index],
+		    points->m[1][index],
+		    points->m[2][index] );
+	
+	add_polygon(polygon,
+		    points->m[0][lat+1],
+		    points->m[1][lat+1],
+		    points->m[2][lat+1],
+		    points->m[0][index],
+		    points->m[1][index],
+		    points->m[2][index],
+		    points->m[0][lat],
+		    points->m[1][lat],
+		    points->m[2][lat] 		
+		    );
+      }
+      /* printf("%lf %lf %lf %lf %lf %lf %lf %lf %lf\n",  */
+      /* 	     points->m[0][index+1], */
+      /* 	     points->m[1][index+1], */
+      /* 	     points->m[2][index+1], */
+      /* 	     points->m[0][index+num_steps], */
+      /* 	     points->m[1][index+num_steps], */
+      /* 	     points->m[2][index+num_steps], */
+      /* 	     points->m[0][index+num_steps+1], */
+      /* 	     points->m[1][index+num_steps+1], */
+      /* 	     points->m[2][index+num_steps+1] 		 */
+      /* 	     ); */
     }
   }
-
-  /* for ( lat = latStart; lat < latStop; lat++ ) { */
-  /*   for ( longt = longStart; longt <= longStop; longt++ ) { */
-
-  /*     index = lat * (num_steps) + longt; */
-  /*     add_edge( edges, points->m[0][index], */
-  /* 		points->m[1][index], */
-  /* 		points->m[2][index], */
-  /* 		points->m[0][index] + 1, */
-  /* 		points->m[1][index] + 1, */
-  /* 		points->m[2][index] + 1); */
-  /*   } */
-  /* }   */
   free_matrix(points);
 }
 
