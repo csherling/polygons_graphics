@@ -50,8 +50,10 @@ int main(int argc, char **argv) {
 
   /* ident(edges); */
   
-  add_sphere(polygons, 250, 250, 250, 100, 0.10);
+  /* add_sphere(polygons, 250, 250, 250, 100, 0.10); */
 
+  add_torus(polygons,250,250,250,50,100,0.1);
+  
   /* matrix_mult(make_rotX(30), polygons); */
   /* matrix_mult(make_rotY(30), polygons); */
   
