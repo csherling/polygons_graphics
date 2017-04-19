@@ -50,15 +50,16 @@ int main(int argc, char **argv) {
 
   /* ident(edges); */
   
-  /* add_box(polygons,25,475,0,450,450,450); */
-  /* add_sphere(polygons, 250, 250, 250, 50, 0.05); */
-  /* add_torus(polygons,250,250,250,150,100,0.05); */
-  
+  add_box(polygons,-80,-120,0,75,75,75);
+  /* add_box(polygons, -200, 200, 200, 400, 400, 400); */
+  /* add_sphere(polygons, 0, 0, 0, 50, 0.05); */
+  /* add_torus(polygons,0,0,0,150,100,0.05); */
+  /* matrix_mult(make_translate(-250,-250,0), polygons); */
   /* add_box(polygons,275,175,0,40,50,50); */
 
-  /* matrix_mult(make_rotX(45), polygons); */
-  /* matrix_mult(make_rotY(45), polygons); */
-  /* matrix_mult(make_translate(0,200,0), polygons); */
+  matrix_mult(make_rotX(30), polygons);
+  matrix_mult(make_rotY(-20), polygons);
+  matrix_mult(make_translate(250,250,0), polygons);
   
   /* print_matrix(edges); */
   /* print_matrix(polygons); */
@@ -72,6 +73,9 @@ int main(int argc, char **argv) {
   /* print_matrix(polygons); */
   
   display(s);
+
+
+  save_extension(s, "thing1.png");
   
   free_matrix(polygons);
   free_matrix( edges );

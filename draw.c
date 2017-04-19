@@ -83,11 +83,11 @@ void draw_polygons( struct matrix *polygons, screen s, color c ) {
     double dotp = 0.0;
     dotp = dot(0,0,1,nx,ny,nz);
     printf("got here! dot: %lf\n", dotp);
-    double theta = 0.0;
-    theta = acos(dotp / mag(nx,ny,nz));
-    printf("got here! mag\n theta: %lf\n", theta);
+    double costheta = 0.0;
+    costheta = dotp / mag(nx,ny,nz);
+    printf("got here! mag\n theta: %lf\n", costheta);
     
-    if(theta < M_PI/2 && theta > -M_PI/2){
+    if(costheta > 0){
       printf("drawning\n");
       draw_line( polygons->m[0][point],
 		 polygons->m[1][point],
@@ -175,46 +175,46 @@ void add_box( struct matrix * polygons,
 
   //left
   add_polygon(polygons,x0,y0,z1,
-	      x0,y1,z1,
-	      x0,y1,z0);
+  	      x0,y1,z1,
+  	      x0,y1,z0);
   add_polygon(polygons,x0,y0,z1,
-	      x0,y1,z0,
-	      x0,y0,z0);
+  	      x0,y1,z0,
+  	      x0,y0,z0);
   //front
   add_polygon(polygons,x0,y0,z0,
-	      x0,y1,z0,
-	      x1,y1,z0);
+  	      x0,y1,z0,
+  	      x1,y1,z0);
   add_polygon(polygons,x0,y0,z0,
-	      x1,y1,z0,
-	      x1,y0,z0);
+  	      x1,y1,z0,
+  	      x1,y0,z0);
   //right
   add_polygon(polygons,x1,y0,z0,
-	      x1,y1,z0,
-	      x1,y1,z1);
-  add_polygon(polygons,x1,y0,z0,
-	      x1,y1,z1,
-	      x1,y0,z1);
+  	      x1,y1,z0,
+  	      x1,y0,z1);
+  add_polygon(polygons,x1,y1,z0,
+  	      x1,y1,z1,
+  	      x1,y0,z1);
   //back
   add_polygon(polygons,x1,y0,z1,
-	      x1,y1,z1,
-	      x0,y1,z1);
+  	      x1,y1,z1,
+  	      x0,y1,z1);
   add_polygon(polygons,x1,y0,z1,
-	      x0,y1,z1,
-	      x0,y0,z1);
+  	      x0,y1,z1,
+  	      x0,y0,z1);
   //top
   add_polygon(polygons,x0,y0,z1,
-	      x0,y0,z0,
-	      x1,y0,z0);
+  	      x0,y0,z0,
+  	      x1,y0,z0);
   add_polygon(polygons,x0,y0,z1,
-	      x1,y0,z0,
-	      x1,y0,z1);
+  	      x1,y0,z0,
+  	      x1,y0,z1);
   //bottom
   add_polygon(polygons,x0,y1,z0,
-	      x0,y1,z1,
-	      x1,y1,z1);
+  	      x0,y1,z1,
+  	      x1,y1,z1);
   add_polygon(polygons,x0,y1,z0,
-	      x1,y1,z1,
-	      x1,y1,z0);
+  	      x1,y1,z1,
+  	      x1,y1,z0);
 }
 
 /*======== void add_sphere() ==========
