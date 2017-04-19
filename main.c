@@ -31,10 +31,10 @@ int main(int argc, char **argv) {
   /* printf("\n"); */
   /* print_matrix( make_hermite() ); */
 
-  /* if ( argc == 2 ) */
-  /*   parse_file( argv[1], transform, edges, s ); */
-  /* else */
-  /*   parse_file( "stdin", transform, edges, s ); */
+  if ( argc == 2 )
+    parse_file( argv[1], transform, edges, s );
+  else
+    parse_file( "face_script", transform, edges, s );
 
 
 
@@ -42,7 +42,7 @@ int main(int argc, char **argv) {
   /* 	      200.0,100.0,0.0, */
   /* 	      200.0,200.0,0.0); */
 
-  /* add_box(polygons,0,100,0,100,100,100); */
+
 
   /* matrix_mult(make_rotX(30), polygons); */
   /* matrix_mult(make_rotY(30), polygons); */
@@ -50,12 +50,15 @@ int main(int argc, char **argv) {
 
   /* ident(edges); */
   
-  /* add_sphere(polygons, 250, 250, 250, 100, 0.10); */
-
-  add_torus(polygons,250,250,250,50,100,0.1);
+  /* add_box(polygons,25,475,0,450,450,450); */
+  /* add_sphere(polygons, 250, 250, 250, 50, 0.05); */
+  /* add_torus(polygons,250,250,250,150,100,0.05); */
   
-  /* matrix_mult(make_rotX(30), polygons); */
-  /* matrix_mult(make_rotY(30), polygons); */
+  /* add_box(polygons,275,175,0,40,50,50); */
+
+  /* matrix_mult(make_rotX(45), polygons); */
+  /* matrix_mult(make_rotY(45), polygons); */
+  /* matrix_mult(make_translate(0,200,0), polygons); */
   
   /* print_matrix(edges); */
   /* print_matrix(polygons); */
@@ -70,6 +73,8 @@ int main(int argc, char **argv) {
   
   display(s);
   
+  free_matrix(polygons);
   free_matrix( edges );
   free_matrix( transform );
+
 }  
