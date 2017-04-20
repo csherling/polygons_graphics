@@ -66,11 +66,11 @@ void draw_polygons( struct matrix *polygons, screen s, color c ) {
   
   int point;
   for (point=0; point < polygons->lastcol-1; point+=3){
-    printf("got here!\n");
+    /* printf("got here!\n"); */
     double nx = 0;
     double ny = 0;
     double nz = 0;
-    printf("got here! declare\n");
+    /* printf("got here! declare\n"); */
     cross(&nx, &ny, &nz,
 	  polygons->m[0][point+1]-polygons->m[0][point],
 	  polygons->m[1][point+1]-polygons->m[1][point],
@@ -79,16 +79,16 @@ void draw_polygons( struct matrix *polygons, screen s, color c ) {
 	  polygons->m[1][point+2]-polygons->m[1][point],
 	  polygons->m[2][point+2]-polygons->m[2][point]
 	  );
-    printf("got here! cross: %lf %lf %lf\n", nx,ny,nz);
+    /* printf("got here! cross: %lf %lf %lf\n", nx,ny,nz); */
     double dotp = 0.0;
     dotp = dot(0,0,1,nx,ny,nz);
-    printf("got here! dot: %lf\n", dotp);
+    /* printf("got here! dot: %lf\n", dotp); */
     double costheta = 0.0;
     costheta = dotp / mag(nx,ny,nz);
-    printf("got here! mag\n theta: %lf\n", costheta);
+    /* printf("got here! mag\n theta: %lf\n", costheta); */
     
     if(costheta > 0){
-      printf("drawning\n");
+      /* printf("drawning\n"); */
       draw_line( polygons->m[0][point],
 		 polygons->m[1][point],
 		 polygons->m[0][point+1],
